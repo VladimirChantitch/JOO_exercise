@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+
 public class NumberOfWordInString {
     public static void main(String[] args) {
         CountNumberInASentence();
@@ -16,8 +19,9 @@ public class NumberOfWordInString {
         System.out.println("Please enter a string");
         String stringInput = sc.nextLine();
 
-        PrintNumberOfWords(stringInput);
         WriteStringInFile(stringInput);
+        String fileContent = ReadFile();
+        PrintNumberOfWords(fileContent);
 
 
     }
@@ -43,5 +47,25 @@ public class NumberOfWordInString {
         }catch(Exception e){
             
         }
+    }
+
+    public static String ReadFile(){
+        System.out.println("Ok know lets read the file");
+        String buffer = "";
+        do{
+            Scanner sc = new Scanner(System.in); 
+            System.out.println("Please enter a Path");
+            try{
+                String stringInput = sc.nextLine();
+                Scanner scan = new Scanner(Paths.get(stringInput.trim()), StandardCharsets.UTF_8.name());
+                buffer = scan.useDelimiter("\\A").next();
+                scan.close();
+            }catch(Exception e){
+
+            }
+
+        }while(buffer.equals(""));
+
+        return buffer;
     }
 }
