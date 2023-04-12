@@ -3,26 +3,31 @@ package com.rectangle;
 import java.util.Scanner;
 
 public class GenerateRectangle {
-    public Integer h_size = -1;
-    public Integer w_size = -1;
-    public GenerateRectangle(){
-        Scanner sc = new Scanner(System.in); 
+    protected Integer h_size = -1;
+    protected Integer w_size = -1;
 
-        do{
-            System.out.println("Please enter the hight > 0 of your rectangle");
-            try{
-                h_size = sc.nextInt();
-            }catch(Exception e){
-    
-            }
+    public GenerateRectangle(){}
 
-            System.out.println("Please enter the weidth > 0 of your rectangle");
-            try{
-                w_size = sc.nextInt();
-            }catch(Exception e){
+    public GenerateRectangle(boolean useSuperLogic){
+        if (useSuperLogic){
+            Scanner sc = new Scanner(System.in); 
+
+            do{
+                System.out.println("Please enter the hight > 0 of your rectangle");
+                try{
+                    h_size = sc.nextInt();
+                }catch(Exception e){
+        
+                }
     
-            }
-        }while(h_size == -1 || w_size == -1);
+                System.out.println("Please enter the weidth > 0 of your rectangle");
+                try{
+                    w_size = sc.nextInt();
+                }catch(Exception e){
+        
+                }
+            }while(h_size == -1 || w_size == -1);
+        }
     }
 
     public void Display(){
