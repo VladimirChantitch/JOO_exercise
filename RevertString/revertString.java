@@ -2,12 +2,12 @@ package Java_Projects.RevertString;
 
 import java.util.Scanner;
 
-public class RevertString {
+public class revertString {
     public static void main(String[] args) {
-        revertString();
+        revertStringFunc();
     }
 
-    public static void revertString(){
+    public static void revertStringFunc(){
         Scanner sc = new Scanner(System.in); 
         System.out.println("Please enter a string");
         String stringInput = sc.nextLine();
