@@ -12,6 +12,7 @@ public class AccountCrud {
         if (connection == null){
             return;
         }
+        
     }
 
     public BankAccount GetBankAccount(){
@@ -28,6 +29,13 @@ public class AccountCrud {
             return null;
         }
         return null;
+    }
+
+    public void UpdateAccount(AccountCrud user){
+        Connection connection = DbHelper.Instance.GetConnectToDb();
+        if (connection == null){
+            return;
+        }
     }
 
     public void DeleteBankAccount(Integer id){
