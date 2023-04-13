@@ -8,9 +8,13 @@ import java.util.List;
 
 import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.BankAccount;
 import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.User;
+import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Cruds.AccountCrud;
+import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Cruds.UserCrud;
 
 public class DbHelper {
     public static DbHelper Instance;
+    public UserCrud userCrud;
+    public AccountCrud accountCrud;
 
     private DbHelper(){
         Instance = this;
@@ -69,65 +73,5 @@ public class DbHelper {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public void InsertUser(User user){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return;
-        }
-    }
-
-    public User GetUser(Integer id){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
-        return null;
-    }
-
-    public List<User> GetAllUsers(){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
-        return null;
-    }
-
-    public void DeleteUser(Integer id){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return;
-        }
-    }
-
-    public void InsertAccount(BankAccount bankAccount){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return;
-        }
-    }
-
-    public BankAccount GetBankAccount(){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
-        return null;
-    }
-
-    public List<BankAccount> GetAllBankAccounts(){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
-        return null;
-    }
-
-    public void DeleteBankAccount(Integer id){
-        Connection connection = GetConnectToDb();
-        if (connection == null){
-            return;
-        }
     }
 }
