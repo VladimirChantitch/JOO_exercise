@@ -1,21 +1,40 @@
-package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Cruds;
+package com.bank.Cruds;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.BankAccount;
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.DbHelper;
+import com.bank.BankAccount;
+import com.bank.Servives.DbHelper;
 
 public class AccountCrud {
-    public void InsertAccount(BankAccount bankAccount){
+    public void insertAccount(BankAccount bankAccount){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
-        }catch(Exception e){
+            try  {
+                String insertUser = "INSERT INTO accounts (balance) VALUES (?)";
 
-        }      
+                PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
+                preparedStatement.setString(1, bankAccount.balance.toString()); 
+                
+                int result = preparedStatement.executeUpdate();
+                
+                if (result > 0) {
+                    System.out.println("Success.");
+                } else {
+                    System.out.println("Error.");
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            } finally{
+                DbHelper.Instance.closeConnection(null);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }    
     }
 
-    public BankAccount GetBankAccount(){
+    public BankAccount findBankAccount(){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -24,7 +43,7 @@ public class AccountCrud {
         return null;
     }
 
-    public List<BankAccount> GetAllBankAccounts(){
+    public List<BankAccount> findAllBankAccounts(){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -33,7 +52,7 @@ public class AccountCrud {
         return null;
     }
 
-    public void UpdateAccount(AccountCrud user){
+    public void updateAccount(AccountCrud user){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -41,7 +60,7 @@ public class AccountCrud {
         }   
     }
 
-    public void DeleteBankAccount(Integer id){
+    public void deleteBankAccount(Integer id){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){

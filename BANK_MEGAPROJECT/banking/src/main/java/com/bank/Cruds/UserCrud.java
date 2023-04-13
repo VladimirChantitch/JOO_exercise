@@ -1,22 +1,21 @@
-package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Cruds;
+package com.bank.Cruds;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.User;
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.DbHelper;
+import com.bank.User;
+import com.bank.Servives.DbHelper;
 
 public class UserCrud {
     public UserCrud(){
 
     }
 
-    public void InsertUser(User user){
+    public void insertUser(User user){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
-            
             try  {
                 String insertUser = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
 
@@ -41,7 +40,7 @@ public class UserCrud {
         }
     }
 
-    public User GetUser(Integer id){
+    public User findUserById(Integer id){
         try{
             String getUser = "SELECT * FROM users WHERE id = ?";
             Connection connection = DbHelper.Instance.GetConnectToDb();
@@ -66,7 +65,7 @@ public class UserCrud {
             return null;
         }
 
-    public List<User> GetAllUsers(){
+    public List<User> findAllUsers(){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -75,7 +74,7 @@ public class UserCrud {
         return null;
     }
 
-    public void UpdateUser(User user){
+    public void updateUser(User user){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -83,7 +82,7 @@ public class UserCrud {
         }   
     }
 
-    public void DeleteUser(Integer id){
+    public void deleteUserById(Integer id){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){

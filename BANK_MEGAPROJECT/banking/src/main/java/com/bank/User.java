@@ -1,4 +1,4 @@
-package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank;
+package com.bank;
 
 public class User {
     public User(String firstName, String lastName){

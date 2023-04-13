@@ -1,9 +1,9 @@
-package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank;
+package com.bank;
 
 import java.util.Scanner;
 
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.BankService;
-import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.DbHelper;
+import com.bank.Servives.BankService;
+import com.bank.Servives.DbHelper;
 
 public class App 
 {
