@@ -7,13 +7,11 @@ import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.Db
 
 public class App 
 {
-    static BankService bankService = null;
     static Integer minOption;
     static Integer maxOption;
     static boolean isQuitting = false;
     public static void main( String[] args )
     {
-        bankService = new BankService();
         ControlPanelHandler();
     }
 
@@ -51,19 +49,19 @@ public class App
     private static void HandleInput(Integer controlInput){
         switch (controlInput) {
             case 1:
-
+                BankService.getInstance().CreateNewAccount();
                 break;
             case 2:
-
+                BankService.getInstance().CreateNewUser();
                 break;
             case 3:
-
+                BankService.getInstance().TransfertMoney();
                 break;
             case 4:
-
+                BankService.getInstance().DeleteUser();
                 break;
             case 5:
-
+                BankService.getInstance().DeleteAccount();
                 break;
         }
     }
