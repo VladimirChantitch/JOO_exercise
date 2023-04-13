@@ -32,11 +32,13 @@ public class UserCrud {
                     System.out.println("Error.");
                 }
             } catch (Exception e){
-
+                e.printStackTrace();
             } finally{
                 DbHelper.Instance.closeConnection(null);
             }
-        } catch(Exception e){}
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public User GetUser(Integer id){
@@ -54,11 +56,13 @@ public class UserCrud {
                                 (result.getString("last_name"))
                 );         
             } catch (Exception e) {
-                
+                e.printStackTrace();
             } finally{
                 DbHelper.Instance.closeConnection(null);
             }
-        } catch(Exception e){}
+        } catch(Exception e){
+            e.printStackTrace();
+        }
             return null;
         }
 

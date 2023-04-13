@@ -34,9 +34,12 @@ public class BankService {
         User user = new User(firstName, lastName);
 
         DbHelper.getInstance().userCrud.InsertUser(user);
+        System.out.println(("USERRRRRR"));
 
-        User user_test =  DbHelper.getInstance().userCrud.GetUser(user.id);
+        User user_test =  DbHelper.getInstance().userCrud.GetUser(1);
+
         System.out.println(user.firstName);
+        sc.nextLine();
     }
 
     public void TransfertMoney(){

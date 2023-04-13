@@ -36,17 +36,17 @@ public class DbHelper {
             Connection connection = GetConnectToDb();
             Statement stmt_1 = connection.createStatement();
             String createUserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS users (")
-                                        .append("id INTEGER PRIMARY KEY,")
-                                        .append("first_name TEXT,")
-                                        .append("last_name TEXT")
+                                        .append("id INT AUTO_INCREMENT PRIMARY KEY,")
+                                        .append("first_name VARCHAR(50),")
+                                        .append("last_name VARCHAR(50)")
                                         .append(")")
                                         .toString();
             stmt_1.executeUpdate(createUserTable);
 
             Statement stmt_2 = connection.createStatement();
             String createAccountTable = new StringBuilder("CREATE TABLE IF NOT EXISTS accounts (")
-                                            .append("id INTEGER PRIMARY KEY,")
-                                            .append("balance INTEGER")
+                                            .append("id INT AUTO_INCREMENT PRIMARY KEY,")
+                                            .append("balance INT")
                                             .append(")")
                                             .toString();
 
@@ -54,8 +54,8 @@ public class DbHelper {
 
             Statement stmt_3 = connection.createStatement();
             String createAccount_UserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS account_client (")
-                                                .append("user_id INTEGER,")
-                                                .append("account_id INTEGER,")
+                                                .append("user_id INT,")
+                                                .append("account_id INT,")
                                                 .append("FOREIGN KEY (user_id) REFERENCES users(id),")
                                                 .append("FOREIGN KEY (account_id) REFERENCES accounts(id),")
                                                 .append(")")
@@ -68,7 +68,7 @@ stmt_2.executeUpdate(createAccountTable);
             stmt_2.close();
             connection.close();
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 
