@@ -2,6 +2,7 @@ package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Cruds;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.User;
@@ -13,54 +14,76 @@ public class UserCrud {
     }
 
     public void InsertUser(User user){
-        String insertUser = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertUser)) {
-            preparedStatement.setString(1, user.firstName); 
-            preparedStatement.setString(2, user.lastName);
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
             
-            int result = preparedStatement.executeUpdate();
-            
-            if (result > 0) {
-                System.out.println("Success.");
-            } else {
-                System.out.println("Error.");
+            try  {
+                String insertUser = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
+
+                PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
+                preparedStatement.setString(1, user.firstName); 
+                preparedStatement.setString(2, user.lastName);
+                
+                int result = preparedStatement.executeUpdate();
+                
+                if (result > 0) {
+                    System.out.println("Success.");
+                } else {
+                    System.out.println("Error.");
+                }
+            } catch (Exception e){
+
+            } finally{
+                DbHelper.Instance.closeConnection(null);
             }
-        } catch (Exception e) {
-            
-        }
+        } catch(Exception e){}
     }
 
     public User GetUser(Integer id){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
+        try{
+            String getUser = "SELECT * FROM users WHERE id = ?";
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+            try  {
+                PreparedStatement preparedStatement = connection.prepareStatement(getUser);
+                preparedStatement.setString(1, id.toString());                      
+                ResultSet result = preparedStatement.executeQuery();
+                result.next();
+
+                return new User(result.getInt("id"),
+                                result.getString("first_name"),
+                                (result.getString("last_name"))
+                );         
+            } catch (Exception e) {
+                
+            } finally{
+                DbHelper.Instance.closeConnection(null);
+            }
+        } catch(Exception e){}
             return null;
         }
-        return null;
-    }
 
     public List<User> GetAllUsers(){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
         return null;
     }
 
     public void UpdateUser(User user){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
     }
 
     public void DeleteUser(Integer id){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
     }
 }

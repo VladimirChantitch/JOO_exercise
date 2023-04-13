@@ -8,40 +8,44 @@ import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives.Db
 
 public class AccountCrud {
     public void InsertAccount(BankAccount bankAccount){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
-        
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }      
     }
 
     public BankAccount GetBankAccount(){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
         return null;
     }
 
     public List<BankAccount> GetAllBankAccounts(){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return null;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
         return null;
     }
 
     public void UpdateAccount(AccountCrud user){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
     }
 
     public void DeleteBankAccount(Integer id){
-        Connection connection = DbHelper.Instance.GetConnectToDb();
-        if (connection == null){
-            return;
-        }
+        try{
+            Connection connection = DbHelper.Instance.GetConnectToDb();
+        }catch(Exception e){
+
+        }   
     }
 }

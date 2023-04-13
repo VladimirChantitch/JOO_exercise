@@ -3,8 +3,10 @@ package Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.Servives;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+
 
 import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.BankAccount;
 import Java_Projects.BANK_MEGAPROJECT.banking.src.main.java.com.bank.User;
@@ -30,8 +32,8 @@ public class DbHelper {
     }
 
     private void CreateDB(){
-        Connection connection = GetConnectToDb();
         try{
+            Connection connection = GetConnectToDb();
             Statement stmt_1 = connection.createStatement();
             String createUserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS users (")
                                         .append("id INTEGER PRIMARY KEY,")
@@ -68,24 +70,19 @@ stmt_2.executeUpdate(createAccountTable);
         }catch(Exception e){
 
         }
-        finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
-    public Connection GetConnectToDb(){
-        try{
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:test.db");
-            return connection;
-        }catch (Exception e){
-            e.printStackTrace();
+    private static final String DB_URL = "jdbc:h2:~/test"; 
+    private static final String USER = "a"; 
+    private static final String PASSWORD = "b";
+
+    public Connection GetConnectToDb() throws SQLException {
+        return DriverManager.getConnection(DB_URL, USER, PASSWORD);
+    }
+
+    public void closeConnection(Connection connection) throws SQLException {
+        if (connection != null) {
+            connection.close();
         }
-        return null;
     }
 }

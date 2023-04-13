@@ -10,6 +10,7 @@ public class App
     static Integer minOption;
     static Integer maxOption;
     static boolean isQuitting = false;
+
     public static void main( String[] args )
     {
         ControlPanelHandler();
@@ -22,17 +23,30 @@ public class App
             Scanner sc = new Scanner(System.in); 
             try{
                 controlInteger = (Integer)sc.nextInt();
-                if(controlInteger == 6){
-                    return;
-                }
-                if (controlInteger >= minOption && controlInteger <= maxOption ){
-                    HandleInput(controlInteger);
+                switch (controlInteger) {
+                    case 1:
+                        BankService.getInstance().CreateNewAccount();
+                        break;
+                    case 2:
+                        BankService.getInstance().CreateNewUser();
+                        break;
+                    case 3:
+                        BankService.getInstance().TransfertMoney();
+                        break;
+                    case 4:
+                        BankService.getInstance().DeleteUser();
+                        break;
+                    case 5:
+                        BankService.getInstance().DeleteAccount();
+                        break;
+                    case 6:
+                        isQuitting = true;
+                        break;
                 }
             }
             catch(Exception e){
 
-            }     
-            System.out.println(controlInteger);    
+            }      
         }while(!isQuitting);
     }
 
@@ -44,25 +58,5 @@ public class App
         System.out.println("4 - to delete a user");
         System.out.println("5 - to delete an account ");
         System.out.println("6 - to close app ");
-    }
-
-    private static void HandleInput(Integer controlInput){
-        switch (controlInput) {
-            case 1:
-                BankService.getInstance().CreateNewAccount();
-                break;
-            case 2:
-                BankService.getInstance().CreateNewUser();
-                break;
-            case 3:
-                BankService.getInstance().TransfertMoney();
-                break;
-            case 4:
-                BankService.getInstance().DeleteUser();
-                break;
-            case 5:
-                BankService.getInstance().DeleteAccount();
-                break;
-        }
     }
 }
