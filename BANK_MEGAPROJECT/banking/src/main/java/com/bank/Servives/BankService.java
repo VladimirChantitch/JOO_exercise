@@ -3,6 +3,7 @@ package com.bank.Servives;
 import java.util.List;
 import java.util.Scanner;
 
+import com.bank.BankAccount;
 import com.bank.User;
 import com.bank.Cruds.UserCrud;
 
@@ -24,7 +25,7 @@ public class BankService {
     }
 
     public void CreateNewAccount(){
-        List<User> users = DbHelper.getInstance().userCrud.findAllUsers();
+        List<User> users = DbHelper.getInstance().userCrud.findAll();
         if (users.size() <= 0){
             System.out.println("you've got no users lets create one shall we");
             CreateNewUser();
@@ -37,7 +38,7 @@ public class BankService {
                 Scanner sc = new Scanner(System.in); 
                 Integer id = sc.nextInt();
         
-                user = DbHelper.getInstance().userCrud.findUserById(id);
+                user = DbHelper.getInstance().userCrud.findById(id);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -49,7 +50,8 @@ public class BankService {
                 Scanner sc = new Scanner(System.in); 
                 Integer balance = sc.nextInt();
         
-                user = DbHelper.getInstance().userCrud.findUserById(id);
+                BankAccount bankAccount = new BankAccount(balance);  
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -65,7 +67,7 @@ public class BankService {
 
         User user = new User(firstName, lastName);
 
-        DbHelper.getInstance().userCrud.insertUser(user);
+        DbHelper.getInstance().userCrud.insert(user);
     }
 
     public void TransfertMoney(){

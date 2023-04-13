@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 import java.util.List;
 
 import com.bank.User;
+import com.bank.Cruds.CrudsInterfaces.ICrud;
 import com.bank.Servives.DbHelper;
 
-public class UserCrud {
+public class UserCrud implements ICrud<User>{
     public UserCrud(){
 
     }
 
-    public void insertUser(User user){
+    public void insert(User user) {
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
             try  {
@@ -40,7 +41,7 @@ public class UserCrud {
         }
     }
 
-    public User findUserById(Integer id){
+    public User findById(Integer id){
         try{
             String getUser = "SELECT * FROM users WHERE id = ?";
             Connection connection = DbHelper.Instance.GetConnectToDb();
@@ -65,7 +66,7 @@ public class UserCrud {
             return null;
         }
 
-    public List<User> findAllUsers(){
+    public List<User> findAll(){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -74,7 +75,7 @@ public class UserCrud {
         return null;
     }
 
-    public void updateUser(User user){
+    public void update(User user){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -82,7 +83,7 @@ public class UserCrud {
         }   
     }
 
-    public void deleteUserById(Integer id){
+    public void deleteById(Integer id){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){

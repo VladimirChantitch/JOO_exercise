@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.bank.BankAccount;
+import com.bank.Cruds.CrudsInterfaces.ICrud;
 import com.bank.Servives.DbHelper;
 
-public class AccountCrud {
-    public void insertAccount(BankAccount bankAccount){
+public class AccountCrud implements ICrud<BankAccount> {
+
+
+    public void insert(BankAccount bankAccount){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
             try  {
@@ -34,7 +37,7 @@ public class AccountCrud {
         }    
     }
 
-    public BankAccount findBankAccount(){
+    public BankAccount findById(Integer id){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -43,7 +46,7 @@ public class AccountCrud {
         return null;
     }
 
-    public List<BankAccount> findAllBankAccounts(){
+    public List<BankAccount> findAll(){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -52,7 +55,7 @@ public class AccountCrud {
         return null;
     }
 
-    public void updateAccount(AccountCrud user){
+    public void update(BankAccount obj){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
@@ -60,7 +63,7 @@ public class AccountCrud {
         }   
     }
 
-    public void deleteBankAccount(Integer id){
+    public void deleteById(Integer id){
         try{
             Connection connection = DbHelper.Instance.GetConnectToDb();
         }catch(Exception e){
