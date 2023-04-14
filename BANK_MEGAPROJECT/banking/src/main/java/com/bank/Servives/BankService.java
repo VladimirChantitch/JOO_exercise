@@ -50,8 +50,10 @@ public class BankService {
                 Scanner sc = new Scanner(System.in); 
                 Integer balance = sc.nextInt();
         
-                BankAccount bankAccount = new BankAccount(balance);  
-
+                BankAccount bankAccount = new BankAccount(balance);
+                DbHelper.getInstance().userCrud.update(user);  
+                
+                user.account_id = bankAccount.id;
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -71,11 +73,15 @@ public class BankService {
     }
 
     public void TransfertMoney(){
-
+        System.out.println("come back someday --NOT IMPLEMENTED--");
+        //TODO: check if there is at least two bank account in the bank
+        //TODO: ask amount
+        //TODO: ask from account
+        //TODO: ask To account
     }
 
     public void DeleteUser(){
-
+        
     }
 
     public void DeleteAccount(){

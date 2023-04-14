@@ -77,10 +77,25 @@ public class UserCrud implements ICrud<User>{
 
     public void update(User user){
         try{
+            String getUser = "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?";
             Connection connection = DbHelper.Instance.GetConnectToDb();
-        }catch(Exception e){
+            try  {
+                PreparedStatement preparedStatement = connection.prepareStatement(getUser);
+                preparedStatement.setString(1, user.firstName.toString());
+                preparedStatement.setString(1, user.lastName.toString());       
+                preparedStatement.setString(1, user.id.toString());       
 
-        }   
+                ResultSet result = preparedStatement.executeQuery();
+                result.next();
+      
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally{
+                DbHelper.Instance.closeConnection(null);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }       
     }
 
     public void deleteById(Integer id){

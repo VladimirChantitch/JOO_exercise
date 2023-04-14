@@ -41,6 +41,8 @@ public class DbHelper {
                                         .append("id INTEGER AUTO_INCREMENT PRIMARY KEY,")
                                         .append("first_name VARCHAR(50),")
                                         .append("last_name VARCHAR(50)")
+                                        .append("account_id INTEGER,")
+                                        .append("FOREIGN KEY (account_id) REFERENCES accounts(id)")
                                         .append(")")
                                         .toString();
             stmt_1.executeUpdate(createUserTable);
@@ -53,16 +55,6 @@ public class DbHelper {
                                             .toString();
 
             stmt_2.executeUpdate(createAccountTable);
-
-            Statement stmt_3 = connection.createStatement();
-            String createAccount_UserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS account_client (")
-                                                .append("user_id INTEGER,")
-                                                .append("account_id INTEGER,")
-                                                .append("FOREIGN KEY (user_id) REFERENCES users(id),")
-                                                .append("FOREIGN KEY (account_id) REFERENCES accounts(id)")
-                                                .append(")")
-                                                .toString();
-            stmt_3.executeUpdate(createAccount_UserTable);
 
             stmt_2.executeUpdate(createAccountTable);
 

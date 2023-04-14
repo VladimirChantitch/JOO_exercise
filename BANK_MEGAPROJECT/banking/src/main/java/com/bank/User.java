@@ -16,4 +16,5 @@ public class User {
     public Integer id;
     public String firstName;
     public String lastName;
+    public Integer account_id;
 }
