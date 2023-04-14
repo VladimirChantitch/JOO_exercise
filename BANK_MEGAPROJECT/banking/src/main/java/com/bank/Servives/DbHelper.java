@@ -36,16 +36,6 @@ public class DbHelper {
         try{
             Class.forName(JDBC_DRIVER);
             Connection connection = GetConnectToDb();
-            Statement stmt_1 = connection.createStatement();
-            String createUserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS users (")
-                                        .append("id INTEGER AUTO_INCREMENT PRIMARY KEY,")
-                                        .append("first_name VARCHAR(50),")
-                                        .append("last_name VARCHAR(50)")
-                                        .append("account_id INTEGER,")
-                                        .append("FOREIGN KEY (account_id) REFERENCES accounts(id)")
-                                        .append(")")
-                                        .toString();
-            stmt_1.executeUpdate(createUserTable);
 
             Statement stmt_2 = connection.createStatement();
             String createAccountTable = new StringBuilder("CREATE TABLE IF NOT EXISTS accounts (")
@@ -54,9 +44,18 @@ public class DbHelper {
                                             .append(")")
                                             .toString();
 
-            stmt_2.executeUpdate(createAccountTable);
+            Statement stmt_1 = connection.createStatement();
+            String createUserTable = new StringBuilder("CREATE TABLE IF NOT EXISTS users (")
+                                        .append("id INTEGER AUTO_INCREMENT PRIMARY KEY,")
+                                        .append("first_name VARCHAR(50),")
+                                        .append("last_name VARCHAR(50),")
+                                        .append("account_id INTEGER,")
+                                        .append("FOREIGN KEY (account_id) REFERENCES accounts(id)")
+                                        .append(")")
+                                        .toString();
 
             stmt_2.executeUpdate(createAccountTable);
+            stmt_1.executeUpdate(createUserTable);
 
             stmt_1.close();
             stmt_2.close();

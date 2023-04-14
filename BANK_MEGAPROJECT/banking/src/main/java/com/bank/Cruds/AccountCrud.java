@@ -65,9 +65,21 @@ public class AccountCrud implements ICrud<BankAccount> {
 
     public void deleteById(Integer id){
         try{
+            String getUser = "DELETE FROM accounts WHERE id = ?";
             Connection connection = DbHelper.Instance.GetConnectToDb();
-        }catch(Exception e){
+            try  {
+                PreparedStatement preparedStatement = connection.prepareStatement(getUser);
+                preparedStatement.setString(1, id.toString());
 
+                preparedStatement.executeQuery();
+      
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally{
+                DbHelper.Instance.closeConnection(null);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
         }   
     }
 }

@@ -1,5 +1,6 @@
 package com.bank.Servives;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,10 +26,16 @@ public class BankService {
     }
 
     public void CreateNewAccount(){
-        List<User> users = DbHelper.getInstance().userCrud.findAll();
-        if (users.size() <= 0){
-            System.out.println("you've got no users lets create one shall we");
-            CreateNewUser();
+        List<User> users = new ArrayList<User>();
+        
+        try{
+            users = DbHelper.getInstance().userCrud.findAll();
+            if (users == null || users.size() <= 0){
+                System.out.println("you've got no users lets create one shall we");
+                CreateNewUser();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
         User user = null;
@@ -39,6 +46,7 @@ public class BankService {
                 Integer id = sc.nextInt();
         
                 user = DbHelper.getInstance().userCrud.findById(id);
+                System.out.println(user.firstName);
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -68,6 +76,7 @@ public class BankService {
         String lastName = sc.nextLine();
 
         User user = new User(firstName, lastName);
+        System.out.println(user.firstName);
 
         DbHelper.getInstance().userCrud.insert(user);
     }
@@ -81,10 +90,34 @@ public class BankService {
     }
 
     public void DeleteUser(){
+        boolean isRunning = true;
+        do{
+            System.out.println("Whats the id of the user you want to delete ? [secureBank.com]");
+            try {
+                Scanner sc = new Scanner(System.in); 
+                Integer id = sc.nextInt();
         
+                DbHelper.getInstance().userCrud.deleteById(id);
+                isRunning = false;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }while(isRunning == true);
     }
 
     public void DeleteAccount(){
-
+        boolean isRunning = true;
+        do{
+            System.out.println("Whats the id of the Account you want to delete ? [secureBank.com]");
+            try {
+                Scanner sc = new Scanner(System.in); 
+                Integer id = sc.nextInt();
+        
+                DbHelper.getInstance().accountCrud.deleteById(id);
+                isRunning = false;
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }while(isRunning == true);
     }
 }

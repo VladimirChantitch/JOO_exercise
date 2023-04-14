@@ -23,6 +23,12 @@ public class UserCrud implements ICrud<User>{
                 PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
                 preparedStatement.setString(1, user.firstName); 
                 preparedStatement.setString(2, user.lastName);
+
+                ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int accountId = generatedKeys.getInt(1);
+                    System.out.println("UserID: " + accountId);
+                }
                 
                 int result = preparedStatement.executeUpdate();
                 
@@ -100,9 +106,20 @@ public class UserCrud implements ICrud<User>{
 
     public void deleteById(Integer id){
         try{
+            String getUser = "DELETE FROM users WHERE id = ?";
             Connection connection = DbHelper.Instance.GetConnectToDb();
-        }catch(Exception e){
+            try  {
+                PreparedStatement preparedStatement = connection.prepareStatement(getUser);
+                preparedStatement.setString(1, id.toString());
 
+                preparedStatement.executeQuery();    
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally{
+                DbHelper.Instance.closeConnection(null);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
         }   
     }
 }
